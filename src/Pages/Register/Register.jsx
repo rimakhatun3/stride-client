@@ -17,9 +17,7 @@ const {createUser} = UseAuth()
         const name = form.name.value
         const email = form.email.value
         const password = form.password.value
-
-        console.log(name,email,password)
-
+        const photoURL = form.photoURL.value
         createUser(email,password)
         .then(result=>{
             console.log(result)
@@ -28,11 +26,11 @@ const {createUser} = UseAuth()
                 email:result?.user?.email,
                 name: name,
                 password: password,
-                photo : result?.user?.photoURL
+                photo : photoURL
               }
-              fetch(`https://assinment-server-alpha.vercel.app/${result?.user?.email}`,{
-                method:"PUT",
-                headers:{ "Content-type":"application/json"
+              fetch("https://assinment-server-alpha.vercel.app/user",{
+                method:"POST",
+                headers:{ "content-type":"application/json"
                 },
                 body:JSON.stringify(userInfo)
               })
@@ -72,6 +70,10 @@ const {createUser} = UseAuth()
           <div className=" mx-14 " >
             <p className="my-2">Name</p>
             <input className="border w-full    px-4 py-2 rounded-md " placeholder="Enter Your Name" type="text" name="name" id="" />
+          </div>
+          <div className=" mx-14 " >
+            <p className="my-2">Photo URL</p>
+            <input className="border w-full    px-4 py-2 rounded-md " placeholder="Enter Your Name" type="text" name="photoURL" id="" />
           </div>
           <div className=" mx-14 " >
             <p className="mb-2 mt-4">Email</p>

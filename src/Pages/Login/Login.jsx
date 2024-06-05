@@ -5,11 +5,13 @@ import logo from "../.././assets/loginLogo.svg"
 import UseAuth from "../../Hook/UseAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../../Components/SocialLogin";
+import { useRef } from "react";
 const Login = () => {
 const navigate = useNavigate()
 const location = useLocation()
 const from = location?.state?.from?.pathname || '/' 
-const {signIn} = UseAuth()
+const {signIn,resetPassword} = UseAuth()
+const emailRef = useRef()
 
   const handleSubmit = async(e)=>{
     e.preventDefault()
@@ -17,24 +19,16 @@ const {signIn} = UseAuth()
     const name = form.name.value
     const email = form.email.value
     const password = form.password.value
-    const photo = form.photo.value
-
-    console.log(name,email,password)
-
     signIn(email,password)
-
-
-
     .then(result=>{
         console.log(result)
 if(result?.user?.email){
   const userInfo ={
     email:result?.user?.email,
     name: name,
-    password: password,
-    photo : photo
+    password: password, 
   }
-  fetch(`https://assinment-server-alpha.vercel.app/${result?.user?.email}`,{
+  fetch("https://assinment-server-alpha.vercel.app/user",{
     method:"POST",
     headers:{
       "Content-type":"application/json"
@@ -43,15 +37,11 @@ if(result?.user?.email){
   })
   .then(result=>{
     console.log(result)
-   
 })
 .catch(error=>{
     console.log(error.message)
 })
-}
-
-
-        Swal.fire({
+} Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Login Done",
@@ -65,9 +55,22 @@ if(result?.user?.email){
     .catch(error=>{
         console.log(error.message)
     })
-
 }
   
+const handleForgetPassword =(e)=>{
+  const email = emailRef.current.value
+  if(!email){
+    alert("please provide your email Addrees")
+  }
+  resetPassword(email)
+  .then(()=>{
+    alert("please check your email")
+  })
+  .catch(error=>{
+    console.log(error.message)
+  })
+}
+
     return (
      
      <div className="flex flex-col justify-center items-center bg-zinc-50 w-8/12 mx-auto mt-8 pb-16">
@@ -83,12 +86,9 @@ if(result?.user?.email){
   </div>
   <div className=" mx-14 " >
     <p className="mb-2 mt-4">Email</p>
-    <input className="border w-full    px-4 py-2 rounded-md " placeholder="Enter Your Eamil" type="text" name="email" id="" />
+    <input className="border w-full    px-4 py-2 rounded-md " placeholder="Enter Your Eamil" type="text" name="email" ref={emailRef} id="" />
   </div>
-  <div className=" mx-14 " >
-    <p className="mb-2 mt-4">Photo</p>
-    <input className="border w-full    px-4 py-2 rounded-md " placeholder="Enter Your photoURL" type="text" name="photo" id="" />
-  </div>
+  
   <div className=" mx-14 " >
     <p className="mb-2 mt-4">Password</p>
     <input className="border w-full    px-4 py-2 rounded-md " placeholder="Enter Your Name" type="text" name="password" id="" />
@@ -99,7 +99,7 @@ if(result?.user?.email){
     <p>Remember me</p>
   </div>
 
-  <button className="btn btn-link">Forget Password </button>
+  <button onClick={handleForgetPassword} className="btn btn-link">Forget Password </button>
   </div>
 
   <div className="flex flex-co flex-auto justify-center items-center mb-4">

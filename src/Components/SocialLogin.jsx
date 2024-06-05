@@ -20,7 +20,7 @@ goggleLogin()
           
           photo : result?.user?.photoURL
         }
-        fetch(`https://assinment-server-alpha.vercel.app/${result?.user?.email}`,{
+        fetch("https://assinment-server-alpha.vercel.app/user",{
           method:"POST",
           headers:{
             "Content-type":"application/json",
@@ -46,10 +46,33 @@ goggleLogin()
 
 const handleFacebookLogin =()=>{
   facebookLogin()
-  .then(result=>{
+  .then((result)=>{
     console.log(result)
-    navigate('/')
-  })
+    if(result?.user?.email){
+        const userInfo ={
+          email:result?.user?.email,
+          name:result?.user?.displayName,
+          
+          photo : result?.user?.photoURL
+        }
+        fetch("https://assinment-server-alpha.vercel.app/user",{
+          method:"POST",
+          headers:{
+            "Content-type":"application/json",
+            authorization: `Bearer ${token}`
+          },
+          body:JSON.stringify(userInfo)
+        })
+        .then(result=>{
+            console.log(result)
+           
+        })
+        .catch(error=>{
+            console.log(error.message)
+        })
+      }
+    navigate(from,{replace:true})
+})
   .catch(error=>{
     console.log(error.message)
   })

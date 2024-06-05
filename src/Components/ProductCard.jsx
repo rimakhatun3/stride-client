@@ -12,14 +12,15 @@ const ProductCard = ({product}) => {
 const {_id, brand,title,category,description,image_url,price,quantity} = product || {}
 
     return (
-        <div>
-             <Card className='px-5 py-4 border rounded-lg' sx={{ maxWidth: 345 }}>
+        <div className='py-9 px-4'>
+             <Card className='  border rounded-lg h-[80vh]' sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
         image={image_url}
         title="green iguana"
+        className='mt-8 mx-8'
       />
-      <CardContent>
+      <CardContent className='mx-3 mt-3'>
         <Typography gutterBottom variant="h5" component="div">
          {brand}
         </Typography>
@@ -27,11 +28,10 @@ const {_id, brand,title,category,description,image_url,price,quantity} = product
          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        {description
-}
+        {description.split(" ").slice(0,15).join(' ') + '...'}
         </Typography>
       </CardContent>
-      <CardActions className='flex flex-row justify-between'>
+      <CardActions className='flex flex-row justify-between  mx-5'>
         <p><span className='font-semibold'>Price: </span>  $ {price}</p>
        <Link to={`details/${_id}`}> <Button size="small">View Details</Button></Link>
         

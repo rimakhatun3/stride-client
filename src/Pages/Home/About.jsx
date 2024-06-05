@@ -4,8 +4,7 @@ import printer from "../../assets/printer.webp"
 import tablet from "../../assets/tablet.webp"
 import desktop from "../../assets/destop.webp"
 import microove from "../../assets/oven.jpg"
-
-
+import { FaFacebook, FaInstagram, FaTwitter ,FaArrowsAlt, FaLocationArrow } from 'react-icons/fa'
 import 'swiper/css';
 import 'swiper/css/zoom';
 import 'swiper/css/navigation';
@@ -22,6 +21,9 @@ const About = () => {
 <div className='w-6/12'>
     <p className="text-2xl font-bold text-center mb-10">Abou Us</p>
 <p className=' ps-14 justify-evenly'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, nobis suscipit optio temporibus aut et obcaecati placeat ratione delectus, reiciendis praesentium corrupti ea dicta omnis velit ut aliquam vero labore incidunt id autem quasi adipisci ab sunt. Consequatur nobis reprehenderit cum, eaque porro tenetur ullam officia vitae omnis beatae animi?</p>
+<div className="flex justify-center mt-6">
+<button className="btn btn-primary px-10">Explore <FaLocationArrow/></button>
+</div>
 </div>
 <div className='w-6/12 pe-16  '>
 <Swiper

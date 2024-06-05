@@ -5,6 +5,8 @@ const AllUser = () => {
 
     const [user ,setUser] = useState([])
 const token = localStorage.getItem("token")
+
+
     useEffect(()=>{
 fetch('https://assinment-server-alpha.vercel.app/user',{
   headers:{
@@ -17,6 +19,11 @@ fetch('https://assinment-server-alpha.vercel.app/user',{
     setUser(data)
 })
     },[])
+
+    const onDelete =(id)=>{
+  const filterUser = user.filter(singleUser=>singleUser._id !==id)
+  setUser(filterUser)
+    }
 
     return (
         <div>
@@ -36,7 +43,7 @@ fetch('https://assinment-server-alpha.vercel.app/user',{
     </thead>
     <tbody >
      
-     {user?.map((singleUser,index)=><UserRow key={singleUser._id} index={index} singleUser={singleUser}></UserRow>)}
+     {user?.map((singleUser,index)=><UserRow key={singleUser._id} index={index} singleUser={singleUser} onDelete={onDelete}></UserRow>)}
 
       
       
