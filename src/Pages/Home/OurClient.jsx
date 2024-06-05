@@ -20,7 +20,7 @@ const OurClient = () => {
              </div>
             <Swiper
               autoplay={{
-                delay: 500,
+                delay: 3500,
                 disableOnInteraction: false,
               }}
         slidesPerView={3}

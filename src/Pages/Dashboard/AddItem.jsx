@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 
 const AddItem = () => {
     const [category, setCategory] = useState('');
-
+const token = localStorage.getItem("token")
     const HandleAddProduct = async (e)=>{
         e.preventDefault()
         
@@ -31,6 +31,7 @@ const AddItem = () => {
             method:"POST",
             headers:{
                 "Content-type":"application/json",
+                authorization: `Bearer ${token}`
             },
             body:JSON.stringify(itemData)
           })

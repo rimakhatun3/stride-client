@@ -4,9 +4,13 @@ import UserRow from '../../Components/Dashboard/UserRow';
 const AllUser = () => {
 
     const [user ,setUser] = useState([])
-
+const token = localStorage.getItem("token")
     useEffect(()=>{
-fetch('https://assinment-server-alpha.vercel.app/user')
+fetch('https://assinment-server-alpha.vercel.app/user',{
+  headers:{
+    authorization: `Bearer ${token}`
+  }
+})
 .then(res=>res.json())
 .then(data=>{
     console.log(data)

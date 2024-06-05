@@ -8,6 +8,7 @@ const {goggleLogin,facebookLogin} = UseAuth()
 const navigate = useNavigate()
 const location = useLocation()
 const from = location?.state?.from?.pathname || '/' 
+const token = localStorage.getItem("token")
 const handleGoggleLogin =()=>{
 goggleLogin()
 .then((result)=>{
@@ -20,15 +21,16 @@ goggleLogin()
           photo : result?.user?.photoURL
         }
         fetch(`https://assinment-server-alpha.vercel.app/${result?.user?.email}`,{
-          method:"PUT",
+          method:"POST",
           headers:{
-            "Content-type":"application/json"
+            "Content-type":"application/json",
+            authorization: `Bearer ${token}`
           },
           body:JSON.stringify(userInfo)
         })
         .then(result=>{
             console.log(result)
-            localStorage.setItem("token",result.token)
+           
         })
         .catch(error=>{
             console.log(error.message)

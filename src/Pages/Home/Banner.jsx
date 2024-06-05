@@ -7,20 +7,27 @@ import banner4 from '../../assets/banner4.jpg'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation,FreeMode, Autoplay } from 'swiper/modules';
 import Marquee from 'react-fast-marquee';
 
 const Banner = () => {
 
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    
     return (
         <div>
             <Swiper
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            slidesPerView={1}
+        
+        freeMode={true}
          pagination={{
             type: 'progressbar',
           }}
           navigation={true}
-          modules={[Pagination, Navigation]}
+          modules={[Pagination, Navigation,FreeMode, Autoplay]}
          
       >
         <SwiperSlide  >

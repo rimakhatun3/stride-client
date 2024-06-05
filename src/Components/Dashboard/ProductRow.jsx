@@ -4,10 +4,14 @@ import Swal from 'sweetalert2';
 
 const ProductRow = ({product,index,handleDelete}) => {
     const {brand,title,image_url,category,price,_id,quantity} = product || {}
+    const token = localStorage.getItem("token")
 
     const onDelete = ()=>{
        fetch(`https://assinment-server-alpha.vercel.app/product/${_id}`,{
-        method:"DELETE"
+        method:"DELETE",
+        headers:{
+          authorization: `Bearer ${token}`
+        }
        })
        .then(res=>res.json())
        .then(data=>{

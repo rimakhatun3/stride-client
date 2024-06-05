@@ -4,9 +4,12 @@ import ProductCard from '../../Components/ProductCard';
 const OurProduct = () => {
 
     const [products,setProducts] = useState()
+const token = localStorage.getItem("token")
 
     useEffect(()=>{
-        fetch('https://assinment-server-alpha.vercel.app/product')
+        fetch('https://assinment-server-alpha.vercel.app/product',{
+           headers: {authorization: `Bearer ${token}`}
+        })
         .then(res=>res.json())
         .then(data=>{
             console.log(data)

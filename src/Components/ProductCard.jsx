@@ -10,10 +10,10 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({product}) => {
 const {_id, brand,title,category,description,image_url,price,quantity} = product || {}
-console.log(product)
+
     return (
         <div>
-             <Card sx={{ maxWidth: 345 }}>
+             <Card className='px-5 py-4 border rounded-lg' sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
         image={image_url}

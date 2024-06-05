@@ -40,6 +40,26 @@ useEffect(()=>{
         if(currentUser){
             setUser(currentUser)
             setLoading(false)
+            if(currentUser?.email){
+const user = {email: currentUser.email}
+
+fetch('https://assinment-server-alpha.vercel.app/jwt',{
+    method:"POST",
+    headers:{
+        "content-type": "application/json"
+    },
+    body: JSON.stringify(user)
+})
+.then(res=>res.json())
+.then(data=>{
+    console.log(data)
+    localStorage.setItem("token" , data.token)
+})
+            }
+
+           else{
+            localStorage.removeItem("token")
+           }
             
         }
 

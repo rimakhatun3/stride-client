@@ -43,7 +43,7 @@ if(result?.user?.email){
   })
   .then(result=>{
     console.log(result)
-    localStorage.setItem("token",result?.token)
+   
 })
 .catch(error=>{
     console.log(error.message)

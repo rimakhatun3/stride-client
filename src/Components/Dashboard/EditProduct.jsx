@@ -8,6 +8,7 @@ const EditProduct = () => {
     console.log(productData)
 
     const [category, setCategory] = useState('');
+    const token = localStorage.getItem("token")
 
     const HandleEditProduct = async (e)=>{
         e.preventDefault()
@@ -36,6 +37,7 @@ const EditProduct = () => {
             method:"PATCH",
             headers:{
                 "Content-type":"application/json",
+                authorization: `Bearer ${token}`
             },
             body:JSON.stringify(itemData)
           })

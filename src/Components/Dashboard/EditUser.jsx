@@ -6,6 +6,7 @@ const EditUser = () => {
 
     const userData = useLoaderData()
     console.log(userData)
+    const token = localStorage.getItem("token")
 
     const HandleEdit = async(e)=>{
         e.preventDefault()
@@ -18,10 +19,11 @@ const EditUser = () => {
             name,email,password
         }
 
-     await fetch(`https://assinment-server-alpha.vercel.app/${userData._id}`,{
+     await fetch(`https://assinment-server-alpha.vercel.app/user/${userData._id}`,{
         method:"PATCH",
         headers:{
-            "Content-type":"application/json"
+            "Content-type":"application/json",
+            authorization: `Bearer ${token}`
         },
         body:JSON.stringify(userInfo)
      })

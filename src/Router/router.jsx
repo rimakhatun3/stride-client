@@ -76,7 +76,7 @@ const router = createBrowserRouter([
             {
                 path:'allUser/edituser/:id',
                 element:<EditUser/>,
-                loader: ({params})=> fetch(`https://assinment-server-alpha.vercel.app/${params.id}`)
+                loader: ({params})=> fetch(`https://assinment-server-alpha.vercel.app/user/${params.id}`)
             },
             {
                 path:'allItem/editProduct/:id',
